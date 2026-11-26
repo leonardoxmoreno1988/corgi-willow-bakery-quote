@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Loader2, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Info, Loader2, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { POLICY_REFERENCE, REASSURANCE, formatCompact, pluralEmployees } from "../../data/mockInsurance";
 import type { QuestionnaireAnswers } from "../../types/insurance";
@@ -126,7 +126,10 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
               </div>
             ))}
           </dl>
-          <p className="mt-4 border-t border-hairline/70 pt-3 text-xs text-muted">£250 excess on equipment claims. Stock spoilage isn't covered.</p>
+          <p className="mt-4 flex items-center gap-2 border-t border-hairline/70 pt-3 text-xs text-muted">
+            <Info className="h-3.5 w-3.5 shrink-0 text-muted" aria-hidden />
+            £250 excess on equipment claims. Stock spoilage isn't covered.
+          </p>
         </div>
 
         <button
