@@ -58,15 +58,20 @@ export function priceFor(answers: QuestionnaireAnswers): number {
 }
 
 /** Plain-English reason for a price move between two sets of answers. */
-export function priceChangeReason(from: QuestionnaireAnswers, to: QuestionnaireAnswers): string {
+export function priceChangeReason(
+  from: QuestionnaireAnswers,
+  to: QuestionnaireAnswers,
+): { summary: string; was: string } {
   const teamChanged = from.employees !== to.employees;
   const kitChanged = from.equipmentValue !== to.equipmentValue;
   const parts: string[] = [];
-  if (teamChanged) parts.push(`public liability adjusts for ${pluralEmployees(to.employees)}`);
+  if (teamChanged) parts.push(`liability adjusts for ${to.employees} staff`);
   if (kitChanged) parts.push(`equipment cover moves to ${formatCurrency(to.equipmentValue)}`);
   const text = parts.join(" and ");
-  const was = `Was ${formatCurrency(priceFor(from))}/mo${teamChanged ? ` for ${from.employees}` : ""}`;
-  return `${text.charAt(0).toUpperCase()}${text.slice(1)} · ${was}`;
+  return {
+    summary: `${text.charAt(0).toUpperCase()}${text.slice(1)}`,
+    was: `Was ${formatCurrency(priceFor(from))}/mo${teamChanged ? ` for ${from.employees}` : ""}`,
+  };
 }
 
 /** £1,000,000 → "£1m", £15,000 → "£15k" */

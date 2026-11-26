@@ -282,7 +282,14 @@ export function EditDrawer({
                     {formatCurrency(Math.abs(delta))}/mo)
                   </span>
                 </p>
-                <p className="mt-1 text-sm font-normal text-body">{priceChangeReason(answers, draft)}</p>
+                {(() => {
+                  const reason = priceChangeReason(answers, draft);
+                  return (
+                    <p className="mt-1 text-sm font-normal text-pretty text-body">
+                      {reason.summary} · <span className="whitespace-nowrap">{reason.was}</span>
+                    </p>
+                  );
+                })()}
               </div>
             </div>
           )}
