@@ -43,7 +43,9 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
       <div className="flex items-start justify-between gap-4">
         <h3 className="text-lg">{coverage.name}</h3>
         <div className="text-right">
-          <p className="text-[11px] font-medium uppercase tracking-wider text-muted">Limit</p>
+          <span className="mb-1 inline-block rounded-[6px] bg-[#FFE4D4] px-2 py-0.5 text-[11px] font-semibold tracking-wider text-corgi uppercase">
+            Limit
+          </span>
           <p className="text-xl font-semibold tracking-tight text-ink">{coverage.limitShort}</p>
         </div>
       </div>
