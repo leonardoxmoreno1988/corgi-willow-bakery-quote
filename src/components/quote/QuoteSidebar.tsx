@@ -54,7 +54,7 @@ function PriceChange({
 
   return (
     <div className="animate-fade-up mt-5 rounded-[8px] border border-hairline bg-fog p-4">
-      <p className="flex items-center gap-2 text-sm font-semibold text-heading">
+      <p className="flex items-center gap-2 text-sm font-semibold text-corgi">
         {delta !== 0 && <Icon className="size-4 text-corgi" aria-hidden />}
         Why your price changed
       </p>
