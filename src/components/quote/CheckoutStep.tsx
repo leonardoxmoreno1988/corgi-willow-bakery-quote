@@ -164,7 +164,7 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
           {phase === "paying" && <Loader2 className="size-4 animate-spin" aria-hidden />}
           {phase === "paying" ? "Activating…" : "Pay & Activate Cover"}
         </button>
-        <TrustStrip />
+        <TrustStrip size="large" />
 
         <div className="mt-6 flex flex-wrap justify-between gap-3 border-t border-hairline pt-5 text-sm font-medium">
           <button type="button" onClick={onBack} className="flex items-center gap-1.5 hover:text-ink">

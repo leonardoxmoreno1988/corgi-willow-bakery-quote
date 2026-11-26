@@ -1,4 +1,5 @@
 import { BadgeCheck, RotateCcw, Zap, type LucideIcon } from "lucide-react";
+import { cn } from "../../utils/formatters";
 
 const SIGNALS: { icon: LucideIcon; label: string }[] = [
   { icon: Zap, label: "Instant cover" },
@@ -6,15 +7,28 @@ const SIGNALS: { icon: LucideIcon; label: string }[] = [
   { icon: RotateCcw, label: "Cancel anytime" },
 ];
 
-export function TrustStrip() {
+interface TrustStripProps {
+  /** "compact" for the narrow quote sidebar, "large" for the wider checkout card. */
+  size?: "compact" | "large";
+}
+
+export function TrustStrip({ size = "compact" }: TrustStripProps) {
+  const large = size === "large";
   return (
-    <ul className="mt-4 grid grid-cols-3 gap-2 text-center">
+    <ul className={cn("grid grid-cols-3 gap-2 text-center", large ? "mt-5" : "mt-4")}>
       {SIGNALS.map(({ icon: Icon, label }) => (
         <li
           key={label}
-          className="flex flex-col items-center gap-1 text-[11px] font-medium text-body"
+          className={cn(
+            "flex flex-col items-center font-medium",
+            large ? "gap-1.5 text-[13px] text-ink" : "gap-1 text-[11px] text-body",
+          )}
         >
-          <Icon className="size-[15px] shrink-0 text-body" strokeWidth={1.75} aria-hidden />
+          <Icon
+            className={cn("shrink-0 text-body", large ? "size-[18px]" : "size-[15px]")}
+            strokeWidth={1.75}
+            aria-hidden
+          />
           {label}
         </li>
       ))}
