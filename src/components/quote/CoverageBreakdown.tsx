@@ -7,10 +7,11 @@ import {
   Store,
   ThermometerSnowflake,
   Zap,
+  ZapOff,
   type LucideIcon,
 } from "lucide-react";
 import { exclusions, getCoverages } from "../../data/mockInsurance";
-import type { Coverage, ScenarioIcon } from "../../types/insurance";
+import type { Coverage, CoverageExample, ScenarioIcon } from "../../types/insurance";
 import { cn, formatCurrency } from "../../utils/formatters";
 
 const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
@@ -20,6 +21,7 @@ const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
   flame: Flame,
   cog: Cog,
   zap: Zap,
+  "zap-off": ZapOff,
   snowflake: Snowflake,
   "thermometer-snowflake": ThermometerSnowflake,
 };
@@ -32,6 +34,19 @@ function ScenarioGlyph({ icon, className }: { icon: ScenarioIcon; className?: st
       strokeWidth={1.75}
       aria-hidden
     />
+  );
+}
+
+function ScenarioList({ items }: { items: CoverageExample[] }) {
+  return (
+    <ul className="mt-4 grid gap-x-4 gap-y-4 text-sm sm:grid-cols-2">
+      {items.map((item) => (
+        <li key={item.text} className="flex items-start gap-3 text-body">
+          <ScenarioGlyph icon={item.icon} />
+          {item.text}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -52,14 +67,7 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
 
       <p className="mt-4 text-sm">{coverage.summary}</p>
 
-      <ul className="mt-4 grid gap-x-4 gap-y-4 text-sm sm:grid-cols-2">
-        {coverage.examples.map((example) => (
-          <li key={example.text} className="flex items-start gap-3 text-body">
-            <ScenarioGlyph icon={example.icon} />
-            {example.text}
-          </li>
-        ))}
-      </ul>
+      <ScenarioList items={coverage.examples} />
 
       <div className="mt-5 rounded-lg border border-hairline bg-fog p-4">
         <div className="flex items-baseline justify-between gap-3">
@@ -84,27 +92,20 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
         ))}
       </section>
 
-      <section
-        aria-labelledby="exclusions-title"
-        className="rounded-lg border border-hairline bg-[#FAFAFA] p-5 sm:p-6"
-      >
+      <section aria-labelledby="exclusions-title" className="space-y-4">
         <h2 id="exclusions-title" className="text-xl">What's Not Covered</h2>
-        <ul className="mt-4 space-y-4">
-          {exclusions.map((item) => (
-            <li key={item.id} className="flex items-start gap-3">
-              <ScenarioGlyph icon={item.icon} className="text-ink" />
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <p className="font-semibold text-ink">{item.title}</p>
-                  <span className="rounded-md bg-ink px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
-                    Not covered
-                  </span>
-                </div>
-                <p className="mt-1 text-sm">{item.description}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {exclusions.map((item) => (
+          <article key={item.id} className="rounded-lg border border-hairline bg-surface p-5 sm:p-6">
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="text-lg">{item.title}</h3>
+              <span className="rounded-[6px] border border-hairline bg-fog px-2 py-0.5 text-[11px] font-semibold tracking-wider text-body uppercase">
+                Excluded
+              </span>
+            </div>
+            <p className="mt-4 text-sm">{item.description}</p>
+            <ScenarioList items={item.examples} />
+          </article>
+        ))}
       </section>
     </>
   );

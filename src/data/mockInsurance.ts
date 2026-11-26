@@ -132,10 +132,13 @@ export function getCoverages(equipmentValue: number): Coverage[] {
 export const exclusions: Exclusion[] = [
   {
     id: "stock-spoilage",
-    title: "Stock spoilage",
-    icon: "thermometer-snowflake",
+    title: "Stock Spoilage",
     description:
       "Ingredients, dough, or baked goods ruined by power cuts, equipment breakdown, or temperature changes are not covered.",
+    examples: [
+      { text: "Power cuts or utility outages", icon: "zap-off" },
+      { text: "Fridge or freezer temperature failure", icon: "thermometer-snowflake" },
+    ],
   },
 ];
 

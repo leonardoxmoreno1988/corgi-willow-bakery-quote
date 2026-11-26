@@ -25,7 +25,8 @@ export type ScenarioIcon =
   | "cog"
   | "zap"
   | "snowflake"
-  | "thermometer-snowflake";
+  | "thermometer-snowflake"
+  | "zap-off";
 
 export interface CoverageExample {
   text: string;
@@ -47,8 +48,8 @@ export interface Coverage {
 export interface Exclusion {
   id: string;
   title: string;
-  icon: ScenarioIcon;
   description: string;
+  examples: CoverageExample[];
 }
 
 export interface PricingModel {
