@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { exclusions, getCoverages } from "../../data/mockInsurance";
 import type { Coverage, ScenarioIcon } from "../../types/insurance";
-import { formatCurrency } from "../../utils/formatters";
+import { cn, formatCurrency } from "../../utils/formatters";
 
 const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
   footprints: Footprints,
@@ -24,12 +24,14 @@ const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
   "thermometer-snowflake": ThermometerSnowflake,
 };
 
-function ScenarioIconBadge({ icon }: { icon: ScenarioIcon }) {
+function ScenarioGlyph({ icon, className }: { icon: ScenarioIcon; className?: string }) {
   const Icon = SCENARIO_ICONS[icon];
   return (
-    <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-fog">
-      <Icon className="size-4 text-ink" strokeWidth={1.75} aria-hidden />
-    </span>
+    <Icon
+      className={cn("mt-0.5 h-[18px] w-[18px] shrink-0 text-body", className)}
+      strokeWidth={1.75}
+      aria-hidden
+    />
   );
 }
 
@@ -48,10 +50,10 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
 
       <p className="mt-4 text-sm">{coverage.summary}</p>
 
-      <ul className="mt-4 grid gap-2.5 text-sm sm:grid-cols-2">
+      <ul className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
         {coverage.examples.map((example) => (
-          <li key={example.text} className="flex items-center gap-3 text-body">
-            <ScenarioIconBadge icon={example.icon} />
+          <li key={example.text} className="flex items-start gap-2.5 text-body">
+            <ScenarioGlyph icon={example.icon} />
             {example.text}
           </li>
         ))}
@@ -87,8 +89,8 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
         <h2 id="exclusions-title" className="text-xl">What's Not Covered</h2>
         <ul className="mt-4 space-y-4">
           {exclusions.map((item) => (
-            <li key={item.id} className="flex items-start gap-3">
-              <ScenarioIconBadge icon={item.icon} />
+            <li key={item.id} className="flex items-start gap-2.5">
+              <ScenarioGlyph icon={item.icon} className="text-ink" />
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-semibold text-ink">{item.title}</p>
