@@ -1,4 +1,4 @@
-import { ChevronDown, Loader2, Minus, Plus, X } from "lucide-react";
+import { ChevronDown, Loader2, Minus, Plus, TrendingDown, TrendingUp, X } from "lucide-react";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import {
   CLAIMS_OPTIONS,
@@ -274,14 +274,23 @@ export function EditDrawer({
           {delta !== 0 && (
             <div
               key={draftPrice}
-              className="animate-fade-up rounded-lg border border-hairline bg-fog px-4 py-3 text-sm"
+              className="animate-fade-up flex items-start gap-3 rounded-lg border border-[#FBBF24]/70 bg-[#FFFBEB] px-4 py-3 text-sm"
             >
-              New estimated price:{" "}
-              <span className="font-semibold text-ink">
-                {formatCurrency(draftPrice)}/month ({delta > 0 ? "+" : "−"}
-                {formatCurrency(Math.abs(delta))}/mo)
-              </span>
-              <p className="mt-1 text-xs text-muted">{priceChangeReason(answers, draft)}</p>
+              {delta > 0 ? (
+                <TrendingUp className="mt-0.5 size-4 shrink-0 text-[#D97706]" aria-hidden />
+              ) : (
+                <TrendingDown className="mt-0.5 size-4 shrink-0 text-[#D97706]" aria-hidden />
+              )}
+              <div>
+                <p className="text-[#78350F]">
+                  New estimated price:{" "}
+                  <span className="font-semibold">
+                    {formatCurrency(draftPrice)}/month ({delta > 0 ? "+" : "−"}
+                    {formatCurrency(Math.abs(delta))}/mo)
+                  </span>
+                </p>
+                <p className="mt-1 text-xs text-[#92400E]">{priceChangeReason(answers, draft)}</p>
+              </div>
             </div>
           )}
           <div className="flex gap-3">
