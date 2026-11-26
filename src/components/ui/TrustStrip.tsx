@@ -1,20 +1,23 @@
-import { BadgeCheck, RotateCcw, Zap } from "lucide-react";
+import { BadgeCheck, RotateCcw, Zap, type LucideIcon } from "lucide-react";
+
+const SIGNALS: { icon: LucideIcon; label: string }[] = [
+  { icon: Zap, label: "Instant cover" },
+  { icon: BadgeCheck, label: "£0 broker fees" },
+  { icon: RotateCcw, label: "Cancel anytime" },
+];
 
 export function TrustStrip() {
   return (
-    <ul className="mt-3.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs font-medium text-body">
-      <li className="flex items-center gap-1.5">
-        <Zap className="size-3.5 shrink-0 text-corgi" aria-hidden />
-        Instant cover
-      </li>
-      <li className="flex items-center gap-1.5">
-        <BadgeCheck className="size-3.5 shrink-0 text-heading" aria-hidden />
-        £0 broker fees
-      </li>
-      <li className="flex items-center gap-1.5">
-        <RotateCcw className="size-3.5 shrink-0 text-heading" aria-hidden />
-        Cancel anytime
-      </li>
+    <ul className="mt-4 grid grid-cols-3 gap-2 border-t border-hairline/60 pt-3 text-center">
+      {SIGNALS.map(({ icon: Icon, label }) => (
+        <li
+          key={label}
+          className="flex flex-col items-center gap-1 text-[11px] font-medium text-body"
+        >
+          <Icon className="size-[15px] shrink-0 text-body" strokeWidth={1.75} aria-hidden />
+          {label}
+        </li>
+      ))}
     </ul>
   );
 }
