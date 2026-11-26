@@ -1,5 +1,6 @@
 import { ArrowRight, TrendingDown, TrendingUp, Undo2 } from "lucide-react";
-import { REASSURANCE, priceFor } from "../../data/mockInsurance";
+import { priceFor } from "../../data/mockInsurance";
+import { TrustStrip } from "../ui/TrustStrip";
 import type { QuestionnaireAnswers } from "../../types/insurance";
 import { cn, formatCurrency } from "../../utils/formatters";
 
@@ -140,7 +141,7 @@ export function QuoteSidebar(props: QuoteSidebarProps) {
           Continue to Payment
           <ArrowRight className="size-4" aria-hidden />
         </button>
-        <p className="mt-3 text-center text-xs text-muted">{REASSURANCE}</p>
+        <TrustStrip />
       </aside>
 
       {/* Mobile sticky bar */}
