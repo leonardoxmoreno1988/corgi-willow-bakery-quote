@@ -134,11 +134,7 @@ export const exclusions: Exclusion[] = [
     id: "stock-spoilage",
     title: "Stock Spoilage",
     description:
-      "Ingredients, dough, or baked goods ruined by power cuts, equipment breakdown, or temperature changes are not covered.",
-    examples: [
-      { text: "Power cuts or utility outages", icon: "zap-off" },
-      { text: "Fridge or freezer temperature failure", icon: "thermometer-snowflake" },
-    ],
+      "Ingredients, dough, or baked goods ruined by power cuts, utility outages, fridge or freezer failure, or temperature changes aren't covered under this policy.",
   },
 ];
 

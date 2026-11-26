@@ -5,9 +5,7 @@ import {
   Footprints,
   Snowflake,
   Store,
-  ThermometerSnowflake,
   Zap,
-  ZapOff,
   type LucideIcon,
 } from "lucide-react";
 import { exclusions, getCoverages } from "../../data/mockInsurance";
@@ -21,9 +19,7 @@ const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
   flame: Flame,
   cog: Cog,
   zap: Zap,
-  "zap-off": ZapOff,
   snowflake: Snowflake,
-  "thermometer-snowflake": ThermometerSnowflake,
 };
 
 function ScenarioGlyph({ icon, className }: { icon: ScenarioIcon; className?: string }) {
@@ -100,7 +96,6 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
               </span>
             </div>
             <p className="mt-4 text-sm">{item.description}</p>
-            <ScenarioList items={item.examples} />
           </article>
         ))}
       </section>
