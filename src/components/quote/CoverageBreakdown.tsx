@@ -1,23 +1,45 @@
-import { Ban, Check, Shield, Wrench } from "lucide-react";
+import {
+  Coffee,
+  Cog,
+  Flame,
+  Footprints,
+  Snowflake,
+  Store,
+  ThermometerSnowflake,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { exclusions, getCoverages } from "../../data/mockInsurance";
-import type { Coverage } from "../../types/insurance";
+import type { Coverage, ScenarioIcon } from "../../types/insurance";
 import { formatCurrency } from "../../utils/formatters";
 
-const ICONS = { shield: Shield, wrench: Wrench } as const;
+const SCENARIO_ICONS: Record<ScenarioIcon, LucideIcon> = {
+  footprints: Footprints,
+  coffee: Coffee,
+  store: Store,
+  flame: Flame,
+  cog: Cog,
+  zap: Zap,
+  snowflake: Snowflake,
+  "thermometer-snowflake": ThermometerSnowflake,
+};
+
+function ScenarioIconBadge({ icon }: { icon: ScenarioIcon }) {
+  const Icon = SCENARIO_ICONS[icon];
+  return (
+    <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-fog">
+      <Icon className="size-4 text-ink" strokeWidth={1.75} aria-hidden />
+    </span>
+  );
+}
 
 function CoverageCard({ coverage }: { coverage: Coverage }) {
-  const Icon = ICONS[coverage.icon];
   const hasExcess = coverage.excess > 0;
 
   return (
     <article className="rounded-lg border border-hairline bg-surface p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-fog">
-            <Icon className="size-5 text-ink" aria-hidden />
-          </span>
-          <h3 className="text-lg">{coverage.name}</h3>
-        </div>
+        <h3 className="text-lg">{coverage.name}</h3>
         <div className="text-right">
           <p className="text-[11px] font-medium uppercase tracking-wider text-muted">Limit</p>
           <p className="text-xl font-semibold tracking-tight text-ink">{coverage.limitShort}</p>
@@ -26,11 +48,11 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
 
       <p className="mt-4 text-sm">{coverage.summary}</p>
 
-      <ul className="mt-3 grid gap-1.5 text-sm sm:grid-cols-2">
+      <ul className="mt-4 grid gap-2.5 text-sm sm:grid-cols-2">
         {coverage.examples.map((example) => (
-          <li key={example} className="flex items-start gap-2 text-body">
-            <Check className="mt-0.5 size-4 shrink-0 text-[#16A34A]" strokeWidth={2.5} aria-hidden />
-            {example}
+          <li key={example.text} className="flex items-center gap-3 text-body">
+            <ScenarioIconBadge icon={example.icon} />
+            {example.text}
           </li>
         ))}
       </ul>
@@ -62,20 +84,20 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
         aria-labelledby="exclusions-title"
         className="rounded-lg border border-hairline bg-[#FAFAFA] p-5 sm:p-6"
       >
-        <h2 id="exclusions-title" className="flex items-center gap-2 text-xl">
-          <Ban className="size-5" aria-hidden />
-          What's Not Covered
-        </h2>
+        <h2 id="exclusions-title" className="text-xl">What's Not Covered</h2>
         <ul className="mt-4 space-y-4">
           {exclusions.map((item) => (
-            <li key={item.id}>
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="font-semibold text-ink">{item.title}</p>
-                <span className="rounded-md bg-ink px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
-                  Not covered
-                </span>
+            <li key={item.id} className="flex items-start gap-3">
+              <ScenarioIconBadge icon={item.icon} />
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="font-semibold text-ink">{item.title}</p>
+                  <span className="rounded-md bg-ink px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">
+                    Not covered
+                  </span>
+                </div>
+                <p className="mt-1 text-sm">{item.description}</p>
               </div>
-              <p className="mt-1 text-sm">{item.description}</p>
             </li>
           ))}
         </ul>

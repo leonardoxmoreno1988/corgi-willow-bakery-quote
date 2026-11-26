@@ -84,33 +84,31 @@ const baseCoverages: Coverage[] = [
   {
     id: "public-liability",
     name: "Public Liability",
-    icon: "shield",
     limitShort: "Up to £1m",
     limitAmount: 1_000_000,
     excess: 0,
     summary:
       "Protects you if a customer or passer-by is hurt, or their property is damaged, because of your business.",
     examples: [
-      "A customer slips on a wet floor by the counter",
-      "A hot drink is spilled on someone in your café",
-      "A delivery trolley damages a neighbour's shopfront",
+      { text: "A customer slips on a wet floor by the counter", icon: "footprints" },
+      { text: "A hot drink is spilled on someone in your café", icon: "coffee" },
+      { text: "A delivery trolley damages a neighbour's shopfront", icon: "store" },
     ],
     excessExplainer: "No excess. You pay nothing towards an approved claim.",
   },
   {
     id: "business-equipment",
     name: "Business Equipment Cover",
-    icon: "wrench",
     limitShort: "Up to £15,000",
     limitAmount: 15_000,
     excess: 250,
     summary:
       "Pays to repair or replace the kit your bakery can't run without if it's accidentally damaged, fire-damaged, or stolen.",
     examples: [
-      "Ovens and proofers",
-      "Commercial mixers",
-      "Espresso machines",
-      "Display fridges",
+      { text: "Ovens and proofers", icon: "flame" },
+      { text: "Commercial mixers", icon: "cog" },
+      { text: "Espresso machines", icon: "zap" },
+      { text: "Display fridges", icon: "snowflake" },
     ],
     excessExplainer:
       "You pay the first £250 of an approved equipment claim; Corgi covers the rest up to £15,000.",
@@ -135,6 +133,7 @@ export const exclusions: Exclusion[] = [
   {
     id: "stock-spoilage",
     title: "Stock spoilage",
+    icon: "thermometer-snowflake",
     description:
       "Ingredients, dough, or baked goods ruined by power cuts, equipment breakdown, or temperature changes are not covered.",
   },
