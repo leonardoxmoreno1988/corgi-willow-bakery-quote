@@ -47,12 +47,14 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
       <div className="animate-fade-up mx-auto max-w-xl py-6 sm:py-12">
         <div className="rounded-lg border border-hairline bg-surface p-6 sm:p-8">
           <div className="flex items-center gap-4">
-            <div className="animate-ripple relative size-14 shrink-0 rounded-full">
-              <div className="animate-pop flex size-14 items-center justify-center rounded-full border border-corgi/20 bg-[#FFF4EE]">
+            <div className="animate-ripple relative size-16 shrink-0 rounded-full">
+              <div className="animate-pop rounded-full">
                 <img
-                  src="/logos/corgi-dog-mark.svg"
+                  src="/logos/app-icon-512.png"
                   alt="Corgi"
-                  className="animate-float h-9 w-9 object-contain"
+                  width={64}
+                  height={64}
+                  className="animate-float h-16 w-16 rounded-full object-contain"
                 />
               </div>
               <span
