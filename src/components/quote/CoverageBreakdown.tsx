@@ -55,14 +55,14 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
 
   return (
     <article className="rounded-lg border border-hairline bg-surface p-5 sm:p-6">
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="text-lg">{coverage.name}</h3>
-        <div className="text-right">
-          <span className="mb-1 inline-block rounded-[6px] bg-[#FFE4D4] px-2 py-0.5 text-[11px] font-semibold tracking-wider text-corgi uppercase">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex min-w-0 flex-wrap items-center gap-2.5">
+          <h3 className="text-lg">{coverage.name}</h3>
+          <span className="inline-block rounded-[6px] bg-[#FFE4D4] px-2 py-0.5 text-[11px] font-semibold tracking-wider text-corgi uppercase">
             Limit
           </span>
-          <p className="text-xl font-semibold tracking-tight text-ink">{coverage.limitShort}</p>
         </div>
+        <p className="shrink-0 text-xl font-semibold tracking-tight text-ink">{coverage.limitShort}</p>
       </div>
 
       <p className="mt-4 text-sm">{coverage.summary}</p>
@@ -96,9 +96,9 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
         <h2 id="exclusions-title" className="text-xl">What's Not Covered</h2>
         {exclusions.map((item) => (
           <article key={item.id} className="rounded-lg border border-hairline bg-surface p-5 sm:p-6">
-            <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2.5">
               <h3 className="text-lg">{item.title}</h3>
-              <span className="rounded-[6px] border border-hairline bg-fog px-2 py-0.5 text-[11px] font-semibold tracking-wider text-body uppercase">
+              <span className="inline-block rounded-[6px] bg-[#191919] px-2 py-0.5 text-[11px] font-semibold tracking-wider text-white uppercase">
                 Excluded
               </span>
             </div>
