@@ -6,7 +6,7 @@ import { EditDrawer, type FocusTarget } from "./components/quote/EditDrawer";
 import { QuoteHeader, type Step } from "./components/quote/QuoteHeader";
 import { QuoteSidebar } from "./components/quote/QuoteSidebar";
 import { Toast } from "./components/ui/Toast";
-import { ORIGINAL_ANSWERS, business, priceFor } from "./data/mockInsurance";
+import { ORIGINAL_ANSWERS, priceFor } from "./data/mockInsurance";
 import type { QuestionnaireAnswers } from "./types/insurance";
 
 const ORIGINAL_PRICE = priceFor(ORIGINAL_ANSWERS);
@@ -88,7 +88,7 @@ function App() {
             <div className="mb-6 sm:mb-8">
               <h1 className="text-3xl sm:text-5xl">Review Your Quote</h1>
               <p className="mt-3 max-w-xl text-base">
-                {business.name}, here's what you're covered for, what you'd pay if something goes wrong, and what we don't cover.
+                Check your details, coverage limits, and exclusions before activating cover.
               </p>
             </div>
             <div className="grid items-start gap-6 lg:grid-cols-[1fr_360px]">
