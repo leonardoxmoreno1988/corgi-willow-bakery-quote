@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Licensed font: do not redistribute (see BRAND-KIT.md)
+public/fonts/f37-bolton/

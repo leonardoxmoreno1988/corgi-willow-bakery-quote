@@ -1,122 +1,135 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnswersCard } from "./components/quote/AnswersCard";
+import { CheckoutStep } from "./components/quote/CheckoutStep";
+import { CoverageBreakdown } from "./components/quote/CoverageBreakdown";
+import { EditDrawer, type FocusTarget } from "./components/quote/EditDrawer";
+import { QuoteHeader, type Step } from "./components/quote/QuoteHeader";
+import { QuoteSidebar } from "./components/quote/QuoteSidebar";
+import { Toast } from "./components/ui/Toast";
+import { ORIGINAL_ANSWERS, business, priceFor } from "./data/mockInsurance";
+import type { QuestionnaireAnswers } from "./types/insurance";
+
+const ORIGINAL_PRICE = priceFor(ORIGINAL_ANSWERS);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [answers, setAnswers] = useState<QuestionnaireAnswers>(ORIGINAL_ANSWERS);
+  const [step, setStep] = useState<Step>("review");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [focus, setFocus] = useState<FocusTarget>("business");
+  const [drawerSession, setDrawerSession] = useState(0);
+  const [pulseKey, setPulseKey] = useState(0);
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimer = useRef<number>(undefined);
+
+  const monthlyPrice = priceFor(answers);
+  const changed = (Object.keys(answers) as (keyof QuestionnaireAnswers)[]).some(
+    (k) => answers[k] !== ORIGINAL_ANSWERS[k],
+  );
+
+  const showToast = useCallback((message: string) => {
+    window.clearTimeout(toastTimer.current);
+    setToast(message);
+    toastTimer.current = window.setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  useEffect(() => () => window.clearTimeout(toastTimer.current), []);
+
+  const openDrawer = (target: FocusTarget) => {
+    setFocus(target);
+    setDrawerSession((n) => n + 1);
+    // Mount closed first, then open on the next frame so the slide-in animates.
+    requestAnimationFrame(() => requestAnimationFrame(() => setDrawerOpen(true)));
+  };
+  const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+
+  const save = (next: QuestionnaireAnswers) => {
+    const newPrice = priceFor(next);
+    setAnswers(next);
+    setDrawerOpen(false);
+    if (newPrice !== monthlyPrice) setPulseKey((n) => n + 1);
+    showToast(
+      newPrice !== monthlyPrice
+        ? `Quote updated · now £${newPrice}/month`
+        : "Answers updated · your price is unchanged",
+    );
+  };
+
+  const undo = () => {
+    setAnswers(ORIGINAL_ANSWERS);
+    setPulseKey((n) => n + 1);
+    showToast(`Changes undone · back to £${ORIGINAL_PRICE}/month`);
+  };
+
+  const reset = () => {
+    setAnswers(ORIGINAL_ANSWERS);
+    setStep("review");
+    setDrawerOpen(false);
+    setPulseKey(0);
+    showToast("Prototype reset");
+  };
+
+  const goTo = (next: Step) => {
+    setStep(next);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen">
+      <QuoteHeader step={step} canReset={changed || step === "checkout"} onReset={reset} />
 
-      <div className="ticks"></div>
+      <main className="mx-auto max-w-6xl px-4 pt-6 pb-32 sm:px-6 sm:pt-10 lg:pb-16">
+        {step === "review" ? (
+          <>
+            <div className="mb-6 sm:mb-8">
+              <h1 className="text-3xl sm:text-5xl">Review Your Quote</h1>
+              <p className="mt-3 max-w-xl text-base">
+                {business.name}, here's what you're covered for, what you'd pay if something goes wrong, and what we don't cover.
+              </p>
+            </div>
+            <div className="grid items-start gap-6 lg:grid-cols-[1fr_360px]">
+              <div className="space-y-6">
+                <AnswersCard
+                  answers={answers}
+                  originalEmployees={ORIGINAL_ANSWERS.employees}
+                  originalEquipmentValue={ORIGINAL_ANSWERS.equipmentValue}
+                  onEdit={openDrawer}
+                />
+                <CoverageBreakdown equipmentValue={answers.equipmentValue} />
+              </div>
+              <QuoteSidebar
+                answers={answers}
+                original={ORIGINAL_ANSWERS}
+                pulseKey={pulseKey}
+                onContinue={() => goTo("checkout")}
+                onReview={() => openDrawer("team")}
+                onUndo={undo}
+              />
+            </div>
+          </>
+        ) : (
+          <CheckoutStep
+            answers={answers}
+            monthlyPrice={monthlyPrice}
+            onBack={() => goTo("review")}
+            onReset={reset}
+            onActivated={() => showToast("Cover activated")}
+          />
+        )}
+      </main>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <EditDrawer
+        key={drawerSession}
+        open={drawerOpen}
+        answers={answers}
+        originalEmployees={ORIGINAL_ANSWERS.employees}
+        currentPrice={monthlyPrice}
+        focus={focus}
+        onClose={closeDrawer}
+        onSave={save}
+      />
+      <Toast message={toast} />
+    </div>
+  );
 }
 
-export default App
+export default App;
