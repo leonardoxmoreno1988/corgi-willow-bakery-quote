@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, CheckCircle2, Loader2, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Loader2, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { POLICY_REFERENCE, REASSURANCE, formatCompact, pluralEmployees } from "../../data/mockInsurance";
 import type { QuestionnaireAnswers } from "../../types/insurance";
@@ -106,8 +106,7 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
   return (
     <div className="animate-fade-up mx-auto max-w-xl py-6 sm:py-12">
       <div className="rounded-lg border border-hairline bg-surface p-6 sm:p-8">
-        <CheckCircle2 className="size-8 text-ink" aria-hidden />
-        <h1 className="mt-4 text-3xl sm:text-4xl">Checkout & Bind Cover</h1>
+        <h1 className="text-3xl sm:text-4xl">Checkout & Bind Cover</h1>
         <p className="mt-3">You're one step from being covered. Here's exactly what you're buying.</p>
 
         <div className="mt-6 rounded-lg border border-hairline bg-fog p-5">
@@ -126,7 +125,7 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
               </div>
             ))}
           </dl>
-          <p className="mt-1 text-xs text-muted">£250 excess on equipment claims. Stock spoilage isn't covered.</p>
+          <p className="mt-4 border-t border-hairline/70 pt-3 text-xs text-muted">£250 excess on equipment claims. Stock spoilage isn't covered.</p>
         </div>
 
         <button
