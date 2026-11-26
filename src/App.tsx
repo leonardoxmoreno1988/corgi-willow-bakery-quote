@@ -75,7 +75,12 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <QuoteHeader step={step} canReset={changed || step === "checkout"} onReset={reset} />
+      <QuoteHeader
+        step={step}
+        canReset={changed || step === "checkout"}
+        onReset={reset}
+        onEditAnswers={() => openDrawer("business")}
+      />
 
       <main className="mx-auto max-w-6xl px-4 pt-6 pb-32 sm:px-6 sm:pt-10 lg:pb-16">
         {step === "review" ? (

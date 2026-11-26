@@ -8,11 +8,12 @@ interface QuoteHeaderProps {
   step: Step;
   canReset: boolean;
   onReset: () => void;
+  onEditAnswers: () => void;
 }
 
 const STEPS = ["Questionnaire", "Review Quote", "Activate Cover"] as const;
 
-export function QuoteHeader({ step, canReset, onReset }: QuoteHeaderProps) {
+export function QuoteHeader({ step, canReset, onReset, onEditAnswers }: QuoteHeaderProps) {
   const activeIndex = step === "review" ? 1 : 2;
 
   return (
@@ -31,24 +32,34 @@ export function QuoteHeader({ step, canReset, onReset }: QuoteHeaderProps) {
                 className="flex items-center gap-2"
               >
                 {i > 0 && <span className="h-px w-6 bg-hairline" aria-hidden />}
-                <span
-                  className={cn(
-                    "flex items-center gap-2 text-sm",
-                    active ? "font-semibold text-ink" : "text-muted",
-                  )}
-                >
-                  <span
-                    className={cn(
-                      "flex size-5 items-center justify-center rounded-full text-[11px] font-semibold transition-colors duration-300",
-                      active && "bg-corgi text-white",
-                      done && "bg-ink text-white",
-                      !active && !done && "border border-hairline",
-                    )}
-                  >
-                    {done ? <Check className="size-3" strokeWidth={3} aria-hidden /> : i + 1}
-                  </span>
-                  {label}
-                </span>
+                {(() => {
+                  const clickable = i === 0 && step === "review";
+                  const Tag = clickable ? "button" : "span";
+                  return (
+                    <Tag
+                      {...(clickable
+                        ? { type: "button" as const, onClick: onEditAnswers, title: "Edit your answers" }
+                        : {})}
+                      className={cn(
+                        "flex items-center gap-2 text-sm",
+                        active ? "font-bold text-heading" : "text-muted",
+                        clickable && "cursor-pointer transition-colors hover:text-heading",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "flex size-5 items-center justify-center rounded-full text-[11px] font-semibold transition-colors duration-300",
+                          active && "bg-heading text-white",
+                          done && "bg-[#16A34A] text-white",
+                          !active && !done && "border border-hairline",
+                        )}
+                      >
+                        {done ? <Check className="size-3" strokeWidth={3} aria-hidden /> : i + 1}
+                      </span>
+                      {label}
+                    </Tag>
+                  );
+                })()}
               </li>
             );
           })}
@@ -65,10 +76,8 @@ export function QuoteHeader({ step, canReset, onReset }: QuoteHeaderProps) {
               <span className="hidden sm:inline">Reset prototype</span>
             </button>
           )}
-          <div className="flex items-center gap-2 rounded-lg border border-hairline bg-surface py-1 pr-3 pl-1.5 text-sm font-medium">
-            <span className="flex size-6 items-center justify-center rounded-md bg-fog">
-              <Store className="size-3.5 text-body" aria-hidden />
-            </span>
+          <div className="flex items-center gap-2 text-sm font-medium text-ink">
+            <Store className="size-4 text-muted" aria-hidden />
             {business.name}
           </div>
         </div>
