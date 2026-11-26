@@ -49,8 +49,8 @@ export function QuoteHeader({ step, canReset, onReset, onEditAnswers }: QuoteHea
                       <span
                         className={cn(
                           "flex size-5 items-center justify-center rounded-full text-[11px] font-semibold transition-colors duration-300",
-                          active && "bg-heading text-white",
-                          done && "bg-[#16A34A] text-white",
+                          active && "bg-corgi text-white",
+                          done && "bg-heading text-white",
                           !active && !done && "border border-hairline",
                         )}
                       >
