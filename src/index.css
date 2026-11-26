@@ -27,6 +27,8 @@
   --animate-pulse-orange: pulse-orange 900ms ease-out 1;
   --animate-pop: pop 520ms var(--ease-spring) 1;
   --animate-fade-up: fade-up 360ms var(--ease-spring) both;
+  --animate-ripple: ripple 1200ms ease-out 350ms 1 both;
+  --animate-float: float 6s ease-in-out 900ms infinite;
   --animate-toast: toast-in 420ms var(--ease-spring) both;
 
   @keyframes pulse-orange {
@@ -40,6 +42,14 @@
   @keyframes fade-up {
     from { transform: translateY(8px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes ripple {
+    0% { box-shadow: 0 0 0 0 rgba(255, 92, 0, 0.5); }
+    100% { box-shadow: 0 0 0 22px rgba(255, 92, 0, 0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
   }
   @keyframes toast-in {
     from { transform: translateY(16px) scale(0.96); opacity: 0; }
@@ -83,5 +93,6 @@
   *, *::before, *::after {
     animation-duration: 1ms !important;
     transition-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

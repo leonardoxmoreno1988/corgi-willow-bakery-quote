@@ -139,4 +139,6 @@ export const exclusions: Exclusion[] = [
   },
 ];
 
+export const POLICY_REFERENCE = "CRG-8492";
+
 export const REASSURANCE = "Instant cover · No broker fees · Cancel anytime";

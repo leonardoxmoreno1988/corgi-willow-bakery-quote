@@ -1,6 +1,6 @@
-import { ArrowLeft, CheckCircle2, Loader2, RotateCcw, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Check, CheckCircle2, Loader2, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { REASSURANCE, formatCompact, pluralEmployees } from "../../data/mockInsurance";
+import { POLICY_REFERENCE, REASSURANCE, formatCompact, pluralEmployees } from "../../data/mockInsurance";
 import type { QuestionnaireAnswers } from "../../types/insurance";
 import { formatCurrency } from "../../utils/formatters";
 
@@ -46,14 +46,42 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
     return (
       <div className="animate-fade-up mx-auto max-w-xl py-6 sm:py-12">
         <div className="rounded-lg border border-hairline bg-surface p-6 sm:p-8">
-          <ShieldCheck className="animate-pop size-9 text-ink" aria-hidden />
-          <h1 className="mt-4 text-3xl sm:text-4xl">Cover Activated</h1>
-          <p className="mt-3">
+          <div className="flex items-center gap-4">
+            <div className="animate-ripple relative size-14 shrink-0 rounded-full">
+              <div className="animate-pop flex size-14 items-center justify-center rounded-full border border-corgi/20 bg-[#FFF4EE]">
+                <img
+                  src="/logos/corgi-dog-mark.svg"
+                  alt="Corgi"
+                  className="animate-float h-9 w-9 object-contain"
+                />
+              </div>
+              <span
+                className="animate-pop absolute -right-1 -bottom-1 flex size-6 items-center justify-center rounded-full bg-[#16A34A] text-white ring-2 ring-surface"
+                style={{ animationDelay: "250ms", animationFillMode: "both" }}
+              >
+                <Check className="size-3.5" strokeWidth={3} aria-hidden />
+              </span>
+            </div>
+            <span
+              className="animate-fade-up rounded-lg border border-hairline bg-fog px-2.5 py-1 text-xs font-semibold text-ink"
+              style={{ animationDelay: "150ms" }}
+            >
+              Policy #{POLICY_REFERENCE} · Active
+            </span>
+          </div>
+          <h1 className="animate-fade-up mt-5 text-3xl sm:text-4xl" style={{ animationDelay: "200ms" }}>
+            Cover Activated
+          </h1>
+          <p className="animate-fade-up mt-3" style={{ animationDelay: "260ms" }}>
             {answers.businessName} is covered from now. We've emailed your policy documents.
           </p>
           <dl className="mt-6 space-y-3 border-t border-hairline pt-5 text-sm">
-            {policy.map((row) => (
-              <div key={row.label} className="flex justify-between gap-4">
+            {policy.map((row, i) => (
+              <div
+                key={row.label}
+                className="animate-fade-up flex justify-between gap-4"
+                style={{ animationDelay: `${340 + i * 60}ms` }}
+              >
                 <dt className="text-muted">{row.label}</dt>
                 <dd className="text-right font-medium text-ink">{row.value}</dd>
               </div>
@@ -62,7 +90,8 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
           <button
             type="button"
             onClick={onReset}
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-hairline px-5 py-3 text-sm font-medium transition-all duration-300 ease-spring hover:border-ink active:scale-95"
+            className="animate-fade-up mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-hairline px-5 py-3 text-sm font-medium transition-all duration-300 ease-spring hover:border-ink active:scale-95"
+            style={{ animationDelay: `${340 + policy.length * 60}ms` }}
           >
             <RotateCcw className="size-4" aria-hidden />
             Reset prototype
