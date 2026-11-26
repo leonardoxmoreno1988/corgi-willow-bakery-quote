@@ -46,7 +46,7 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
     return (
       <div className="animate-fade-up mx-auto max-w-xl py-6 sm:py-12">
         <div className="rounded-lg border border-hairline bg-surface p-6 sm:p-8">
-          <div className="flex items-center gap-4">
+          <div className="mb-5 flex w-full items-start justify-between">
             <div className="animate-ripple relative size-16 shrink-0 rounded-full">
               <div className="animate-pop rounded-full">
                 <img
@@ -65,13 +65,14 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
               </span>
             </div>
             <span
-              className="animate-fade-up rounded-lg border border-hairline bg-fog px-2.5 py-1 text-xs font-semibold text-ink"
+              className="animate-fade-up inline-flex items-center gap-2 rounded-[6px] border border-hairline bg-fog px-3 py-1 text-xs font-medium text-ink"
               style={{ animationDelay: "150ms" }}
             >
-              Policy #{POLICY_REFERENCE} · Active
+              <span className="h-2 w-2 rounded-full bg-[#16A34A]" aria-hidden />
+              Active · #{POLICY_REFERENCE}
             </span>
           </div>
-          <h1 className="animate-fade-up mt-5 text-3xl sm:text-4xl" style={{ animationDelay: "200ms" }}>
+          <h1 className="animate-fade-up text-3xl sm:text-4xl" style={{ animationDelay: "200ms" }}>
             Cover Activated
           </h1>
           <p className="animate-fade-up mt-3" style={{ animationDelay: "260ms" }}>
