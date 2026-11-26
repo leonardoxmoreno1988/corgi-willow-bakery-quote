@@ -70,12 +70,9 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
       <ScenarioList items={coverage.examples} />
 
       <div className="mt-5 rounded-lg border border-hairline bg-fog p-4">
-        <div className="flex items-baseline justify-between gap-3">
-          <p className="text-sm font-semibold text-ink">
-            {hasExcess ? `${formatCurrency(coverage.excess)} excess` : "£0 excess"}
-          </p>
-          <p className="text-xs text-muted">{hasExcess ? "On equipment claims" : "On any claim"}</p>
-        </div>
+        <p className="text-sm font-semibold text-ink">
+          {hasExcess ? `${formatCurrency(coverage.excess)} excess` : "£0 excess"}
+        </p>
         <p className="mt-1 text-sm">{coverage.excessExplainer}</p>
       </div>
     </article>
