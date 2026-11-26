@@ -47,14 +47,14 @@ export function AnswersCard({ answers, originalEmployees, originalEquipmentValue
         </button>
       </div>
 
-      <dl className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-hairline bg-hairline sm:grid-cols-2">
+      <dl className="mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-none border border-hairline bg-hairline sm:grid-cols-2">
         {rows.map((row) => (
           <div key={row.label} className="bg-surface">
             <button
               type="button"
               onClick={() => onEdit(row.target)}
               aria-label={`Edit ${row.label}: ${row.value}`}
-              className="group flex h-full w-full items-center justify-between gap-3 p-4 text-left transition-colors hover:bg-fog focus-visible:bg-fog"
+              className="group flex h-full w-full items-center justify-between gap-3 rounded-none p-4 text-left transition-colors hover:bg-fog focus-visible:bg-fog"
             >
               <span>
                 <dt className="text-xs text-muted">{row.label}</dt>
