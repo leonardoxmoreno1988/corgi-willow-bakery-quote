@@ -51,9 +51,9 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
           <p className="mt-3">
             {answers.businessName} is covered from now. We've emailed your policy documents.
           </p>
-          <dl className="mt-6 divide-y divide-hairline rounded-lg border border-hairline">
+          <dl className="mt-6 space-y-3 border-t border-hairline pt-5 text-sm">
             {policy.map((row) => (
-              <div key={row.label} className="flex justify-between gap-4 px-4 py-3 text-sm">
+              <div key={row.label} className="flex justify-between gap-4">
                 <dt className="text-muted">{row.label}</dt>
                 <dd className="text-right font-medium text-ink">{row.value}</dd>
               </div>
@@ -87,9 +87,9 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
           <p className="mt-3 text-sm font-medium text-ink">
             {pluralEmployees(answers.employees)} · £1m Public Liability + {formatCompact(answers.equipmentValue)} Equipment Cover
           </p>
-          <dl className="mt-4 divide-y divide-hairline border-t border-hairline text-sm">
+          <dl className="mt-4 space-y-3 border-t border-hairline pt-4 text-sm">
             {meta.map((row) => (
-              <div key={row.label} className="flex justify-between gap-4 py-2.5">
+              <div key={row.label} className="flex justify-between gap-4">
                 <dt className="text-muted">{row.label}</dt>
                 <dd className="text-right font-medium text-ink">{row.value}</dd>
               </div>

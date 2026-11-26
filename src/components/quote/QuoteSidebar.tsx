@@ -111,21 +111,21 @@ export function QuoteSidebar(props: QuoteSidebarProps) {
         </div>
         <p className="mt-1 text-sm text-muted">{formatCurrency(annual)} a year</p>
 
-        <ul className="mt-5 divide-y divide-hairline border-y border-hairline text-sm">
-          <li className="flex justify-between py-2.5">
-            <span>Public Liability</span>
+        <ul className="mt-5 space-y-3 border-t border-hairline pt-5 text-sm">
+          <li className="flex justify-between gap-4">
+            <span className="text-muted">Public Liability</span>
             <span className="font-medium text-ink">Up to £1m</span>
           </li>
-          <li className="flex justify-between py-2.5">
-            <span>Equipment Cover</span>
+          <li className="flex justify-between gap-4">
+            <span className="text-muted">Equipment Cover</span>
             <span className="font-medium text-ink">Up to {formatCurrency(answers.equipmentValue)}</span>
           </li>
-          <li className="flex justify-between py-2.5">
-            <span>Equipment excess</span>
+          <li className="flex justify-between gap-4">
+            <span className="text-muted">Equipment excess</span>
             <span className="font-medium text-ink">£250</span>
           </li>
-          <li className="flex justify-between py-2.5">
-            <span>Excludes</span>
+          <li className="flex justify-between gap-4">
+            <span className="text-muted">Excludes</span>
             <span className="font-medium text-ink">Stock spoilage</span>
           </li>
         </ul>
