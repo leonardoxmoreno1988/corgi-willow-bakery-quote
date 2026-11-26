@@ -29,7 +29,7 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
       <ul className="mt-3 grid gap-1.5 text-sm sm:grid-cols-2">
         {coverage.examples.map((example) => (
           <li key={example} className="flex items-start gap-2 text-body">
-            <Check className="mt-0.5 size-4 shrink-0 text-ink" aria-hidden />
+            <Check className="mt-0.5 size-4 shrink-0 text-[#16A34A]" strokeWidth={2.5} aria-hidden />
             {example}
           </li>
         ))}
