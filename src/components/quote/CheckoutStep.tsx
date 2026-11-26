@@ -1,4 +1,4 @@
-import { ArrowLeft, Check, Info, Loader2, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Download, FileText, Info, Loader2, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { POLICY_REFERENCE, REASSURANCE, formatCompact, pluralEmployees } from "../../data/mockInsurance";
 import type { QuestionnaireAnswers } from "../../types/insurance";
@@ -10,11 +10,12 @@ interface CheckoutStepProps {
   onBack: () => void;
   onReset: () => void;
   onActivated: () => void;
+  onNotify: (message: string) => void;
 }
 
 type Phase = "idle" | "paying" | "active";
 
-export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivated }: CheckoutStepProps) {
+export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivated, onNotify }: CheckoutStepProps) {
   const [phase, setPhase] = useState<Phase>("idle");
   const timer = useRef<number>(undefined);
   useEffect(() => () => window.clearTimeout(timer.current), []);
@@ -90,13 +91,34 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
               </div>
             ))}
           </dl>
+          <div
+            className="animate-fade-up mt-7 flex flex-col gap-3"
+            style={{ animationDelay: `${340 + policy.length * 60}ms` }}
+          >
+            <button
+              type="button"
+              onClick={() => onNotify(`Certificate of Insurance (${POLICY_REFERENCE}.pdf) downloaded`)}
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-[8px] bg-corgi font-semibold text-white transition-all duration-300 ease-spring hover:bg-[#e65200] active:scale-95"
+            >
+              <Download className="size-[18px]" aria-hidden />
+              Download Certificate of Insurance
+            </button>
+            <button
+              type="button"
+              onClick={() => onNotify("Policy documents & schedule opened")}
+              className="flex h-11 w-full items-center justify-center gap-2 rounded-[8px] border border-hairline bg-surface font-medium text-heading transition-all duration-300 ease-spring hover:bg-fog active:scale-95"
+            >
+              <FileText className="size-[18px]" aria-hidden />
+              View Policy Documents
+            </button>
+          </div>
+        </div>
+        <div className="mt-5 text-center">
           <button
             type="button"
             onClick={onReset}
-            className="animate-fade-up mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-hairline px-5 py-3 text-sm font-medium transition-all duration-300 ease-spring hover:border-ink active:scale-95"
-            style={{ animationDelay: `${340 + policy.length * 60}ms` }}
+            className="text-xs text-muted transition-colors hover:text-heading"
           >
-            <RotateCcw className="size-4" aria-hidden />
             Reset prototype
           </button>
         </div>

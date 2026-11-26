@@ -118,6 +118,7 @@ function App() {
             onBack={() => goTo("review")}
             onReset={reset}
             onActivated={() => showToast("Cover activated")}
+            onNotify={showToast}
           />
         )}
       </main>
