@@ -267,22 +267,22 @@ export function EditDrawer({
           {delta !== 0 && (
             <div
               key={draftPrice}
-              className="animate-fade-up flex items-start gap-3 rounded-lg border border-[#FBBF24]/70 bg-[#FFFBEB] px-4 py-3 text-sm"
+              className="animate-fade-up flex items-start gap-3 rounded-[8px] border border-hairline bg-fog px-4 py-3 text-sm"
             >
               {delta > 0 ? (
-                <TrendingUp className="mt-0.5 size-4 shrink-0 text-[#D97706]" aria-hidden />
+                <TrendingUp className="mt-0.5 size-4 shrink-0 text-corgi" aria-hidden />
               ) : (
-                <TrendingDown className="mt-0.5 size-4 shrink-0 text-[#D97706]" aria-hidden />
+                <TrendingDown className="mt-0.5 size-4 shrink-0 text-corgi" aria-hidden />
               )}
               <div>
-                <p className="text-[#78350F]">
+                <p className="text-heading">
                   New estimated price:{" "}
                   <span className="font-semibold">
                     {formatCurrency(draftPrice)}/month ({delta > 0 ? "+" : "−"}
                     {formatCurrency(Math.abs(delta))}/mo)
                   </span>
                 </p>
-                <p className="mt-1 text-sm font-normal text-[#92400E]">{priceChangeReason(answers, draft)}</p>
+                <p className="mt-1 text-sm font-normal text-body">{priceChangeReason(answers, draft)}</p>
               </div>
             </div>
           )}

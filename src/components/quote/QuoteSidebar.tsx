@@ -53,23 +53,23 @@ function PriceChange({
   }
 
   return (
-    <div className="animate-fade-up mt-5 rounded-lg border border-[#FBBF24]/70 bg-[#FFFBEB] p-4">
-      <p className="flex items-center gap-2 text-sm font-semibold text-[#78350F]">
-        {delta !== 0 && <Icon className="size-4 text-[#D97706]" aria-hidden />}
+    <div className="animate-fade-up mt-5 rounded-[8px] border border-hairline bg-fog p-4">
+      <p className="flex items-center gap-2 text-sm font-semibold text-heading">
+        {delta !== 0 && <Icon className="size-4 text-corgi" aria-hidden />}
         Why your price changed
       </p>
-      <p className="mt-2 text-sm text-[#92400E]">
-        <span className="font-semibold text-[#78350F]">
+      <p className="mt-2 text-sm font-normal text-body">
+        <span className="font-semibold text-heading">
           {delta === 0 ? "No change" : `${sign}${formatCurrency(Math.abs(delta))}/month`}
         </span>{" "}
         · Updated from {formatCurrency(originalPrice)}/mo after changing {changes.join(" and ")} —{" "}
         {reasons.join(" and ")}
       </p>
       <div className="mt-3 flex gap-4 text-sm font-medium">
-        <button type="button" onClick={onReview} className="text-[#78350F] underline underline-offset-4 hover:text-[#92400E]">
+        <button type="button" onClick={onReview} className="text-heading underline underline-offset-2 transition-colors hover:text-corgi">
           Review answers
         </button>
-        <button type="button" onClick={onUndo} className="flex items-center gap-1 text-[#78350F] underline underline-offset-4 hover:text-[#92400E]">
+        <button type="button" onClick={onUndo} className="flex items-center gap-1 text-heading underline underline-offset-2 transition-colors hover:text-corgi">
           <Undo2 className="size-3.5" aria-hidden />
           Undo
         </button>
