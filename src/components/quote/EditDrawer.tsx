@@ -289,7 +289,7 @@ export function EditDrawer({
                     {formatCurrency(Math.abs(delta))}/mo)
                   </span>
                 </p>
-                <p className="mt-1 text-xs text-[#92400E]">{priceChangeReason(answers, draft)}</p>
+                <p className="mt-1 text-sm font-normal text-[#92400E]">{priceChangeReason(answers, draft)}</p>
               </div>
             </div>
           )}
