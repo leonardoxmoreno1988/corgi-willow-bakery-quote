@@ -28,7 +28,7 @@ function ScenarioGlyph({ icon, className }: { icon: ScenarioIcon; className?: st
   const Icon = SCENARIO_ICONS[icon];
   return (
     <Icon
-      className={cn("mt-0.5 h-[18px] w-[18px] shrink-0 text-body", className)}
+      className={cn("h-[22px] w-[22px] shrink-0 text-body", className)}
       strokeWidth={1.75}
       aria-hidden
     />
@@ -50,9 +50,9 @@ function CoverageCard({ coverage }: { coverage: Coverage }) {
 
       <p className="mt-4 text-sm">{coverage.summary}</p>
 
-      <ul className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+      <ul className="mt-4 grid gap-x-4 gap-y-4 text-sm sm:grid-cols-2">
         {coverage.examples.map((example) => (
-          <li key={example.text} className="flex items-start gap-2.5 text-body">
+          <li key={example.text} className="flex items-start gap-3 text-body">
             <ScenarioGlyph icon={example.icon} />
             {example.text}
           </li>
@@ -89,7 +89,7 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
         <h2 id="exclusions-title" className="text-xl">What's Not Covered</h2>
         <ul className="mt-4 space-y-4">
           {exclusions.map((item) => (
-            <li key={item.id} className="flex items-start gap-2.5">
+            <li key={item.id} className="flex items-start gap-3">
               <ScenarioGlyph icon={item.icon} className="text-ink" />
               <div>
                 <div className="flex flex-wrap items-center gap-2">
