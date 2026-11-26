@@ -8,7 +8,7 @@ const SIGNALS: { icon: LucideIcon; label: string }[] = [
 
 export function TrustStrip() {
   return (
-    <ul className="mt-4 grid grid-cols-3 gap-2 border-t border-hairline/60 pt-3 text-center">
+    <ul className="mt-4 grid grid-cols-3 gap-2 text-center">
       {SIGNALS.map(({ icon: Icon, label }) => (
         <li
           key={label}
