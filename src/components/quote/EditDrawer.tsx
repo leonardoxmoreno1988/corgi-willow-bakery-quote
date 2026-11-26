@@ -116,8 +116,6 @@ export function EditDrawer({
     }, 350);
   };
 
-  const employeesChanged = draft.employees !== answers.employees;
-
   return (
     <div className={cn("fixed inset-0 z-50", !open && "pointer-events-none")} inert={!open}>
       <div
@@ -205,7 +203,7 @@ export function EditDrawer({
                     aria-label="Remove one employee"
                     disabled={draft.employees <= MIN_EMPLOYEES}
                     onClick={() => set("employees", clampEmployees(draft.employees - 1))}
-                    className="flex size-10 items-center justify-center rounded-l-lg focus:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="flex size-10 items-center justify-center rounded-l-lg focus:outline-none focus-visible:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
                   >
                     <Minus className="size-4" aria-hidden />
                   </button>
@@ -224,16 +222,11 @@ export function EditDrawer({
                     aria-label="Add one employee"
                     disabled={draft.employees >= MAX_EMPLOYEES}
                     onClick={() => set("employees", clampEmployees(draft.employees + 1))}
-                    className="flex size-10 items-center justify-center rounded-r-lg focus:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="flex size-10 items-center justify-center rounded-r-lg focus:outline-none focus-visible:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
                   >
                     <Plus className="size-4" aria-hidden />
                   </button>
                 </div>
-                {employeesChanged && (
-                  <span key={draft.employees} className="animate-pop rounded-lg border border-hairline bg-fog px-2.5 py-1 text-xs font-semibold text-ink">
-                    {answers.employees} → {draft.employees}
-                  </span>
-                )}
               </div>
               <p className="mt-2 text-xs text-muted">
                 Include full-time, part-time and casual staff. Original answer: {pluralEmployees(originalEmployees)}.
