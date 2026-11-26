@@ -65,8 +65,8 @@ export function priceChangeReason(from: QuestionnaireAnswers, to: QuestionnaireA
   if (teamChanged) parts.push(`public liability adjusts for ${pluralEmployees(to.employees)}`);
   if (kitChanged) parts.push(`equipment cover moves to ${formatCurrency(to.equipmentValue)}`);
   const text = parts.join(" and ");
-  const was = `was ${formatCurrency(priceFor(from))}/month${teamChanged ? ` for ${from.employees}` : ""}`;
-  return `${text.charAt(0).toUpperCase()}${text.slice(1)} (${was})`;
+  const was = `Was ${formatCurrency(priceFor(from))}/mo${teamChanged ? ` for ${from.employees}` : ""}`;
+  return `${text.charAt(0).toUpperCase()}${text.slice(1)} · ${was}`;
 }
 
 /** £1,000,000 → "£1m", £15,000 → "£15k" */
