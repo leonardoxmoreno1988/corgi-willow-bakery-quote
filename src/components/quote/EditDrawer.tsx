@@ -152,7 +152,7 @@ export function EditDrawer({
         </div>
 
         <form
-          className="flex-1 space-y-6 overflow-y-auto p-5"
+          className="flex-1 space-y-6 overflow-y-auto p-5 pb-10"
           onSubmit={(e) => {
             e.preventDefault();
             submit();
@@ -205,7 +205,7 @@ export function EditDrawer({
                     aria-label="Remove one employee"
                     disabled={draft.employees <= MIN_EMPLOYEES}
                     onClick={() => set("employees", clampEmployees(draft.employees - 1))}
-                    className="flex size-10 items-center justify-center rounded-l-lg outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="flex size-10 items-center justify-center rounded-l-lg focus:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
                   >
                     <Minus className="size-4" aria-hidden />
                   </button>
@@ -224,7 +224,7 @@ export function EditDrawer({
                     aria-label="Add one employee"
                     disabled={draft.employees >= MAX_EMPLOYEES}
                     onClick={() => set("employees", clampEmployees(draft.employees + 1))}
-                    className="flex size-10 items-center justify-center rounded-r-lg outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
+                    className="flex size-10 items-center justify-center rounded-r-lg focus:outline-none transition-colors duration-200 hover:bg-fog focus-visible:bg-fog focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-inset active:bg-hairline disabled:opacity-30 disabled:hover:bg-transparent"
                   >
                     <Plus className="size-4" aria-hidden />
                   </button>

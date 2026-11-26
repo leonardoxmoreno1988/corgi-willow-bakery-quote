@@ -105,7 +105,7 @@ const baseCoverages: Coverage[] = [
     limitAmount: 15_000,
     excess: 250,
     summary:
-      "Pays to repair or replace the kit your bakery can't run without if it's damaged, stolen or breaks down.",
+      "Pays to repair or replace the kit your bakery can't run without if it's accidentally damaged, fire-damaged, or stolen.",
     examples: [
       "Ovens and proofers",
       "Commercial mixers",

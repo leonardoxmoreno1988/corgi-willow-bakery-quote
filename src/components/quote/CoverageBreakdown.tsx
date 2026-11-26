@@ -60,7 +60,7 @@ export function CoverageBreakdown({ equipmentValue }: { equipmentValue: number }
 
       <section
         aria-labelledby="exclusions-title"
-        className="rounded-lg border border-hairline border-l-[3px] border-l-ink bg-[#FAFAFA] p-5 sm:p-6"
+        className="rounded-lg border border-hairline bg-[#FAFAFA] p-5 sm:p-6"
       >
         <h2 id="exclusions-title" className="flex items-center gap-2 text-xl">
           <Ban className="size-5" aria-hidden />

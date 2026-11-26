@@ -26,6 +26,7 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
     { label: "Billing", value: "Monthly, cancel anytime" },
   ];
   const policy: { label: string; value: string }[] = [
+    { label: "Monthly price", value: price },
     { label: "Business", value: answers.businessName },
     { label: "Team size", value: pluralEmployees(answers.employees) },
     { label: "Public Liability", value: "Up to £1m · £0 excess" },
@@ -46,10 +47,10 @@ export function CheckoutStep({ answers, monthlyPrice, onBack, onReset, onActivat
       <div className="animate-fade-up mx-auto max-w-xl py-6 sm:py-12">
         <div className="rounded-lg border border-hairline bg-surface p-6 sm:p-8">
           <ShieldCheck className="animate-pop size-9 text-ink" aria-hidden />
-          <h1 className="mt-4 text-3xl sm:text-4xl">
-            Cover Activated for {answers.businessName} · {price}
-          </h1>
-          <p className="mt-3">You're covered from now. We've emailed your policy documents.</p>
+          <h1 className="mt-4 text-3xl sm:text-4xl">Cover Activated</h1>
+          <p className="mt-3">
+            {answers.businessName} is covered from now. We've emailed your policy documents.
+          </p>
           <dl className="mt-6 divide-y divide-hairline rounded-lg border border-hairline">
             {policy.map((row) => (
               <div key={row.label} className="flex justify-between gap-4 px-4 py-3 text-sm">
